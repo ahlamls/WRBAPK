@@ -44,7 +44,7 @@
         android:layout_width="match_parent"
         app:layout_constraintTop_toBottomOf="@id/top"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button"
         android:padding="10dp"
         android:orientation="vertical">
 
@@ -53,27 +53,30 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Nama Lengkap" />
 
         <EditText
             android:id="@+id/nama"
+            android:background="@drawable/tvbg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name" />
+            android:hint="Mas Agus" />
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Nomor Handphone / WA (Diawali dengan 08)" />
 
         <EditText
             android:id="@+id/nohp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:background="@drawable/tvbg"
+            android:hint="08xxxxxxxxxx"
             android:maxLength="14"
             android:inputType="phone" />
 
@@ -88,8 +91,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:lines="3"
+            android:lines="4"
+            android:background="@drawable/tvbg"
             android:gravity="start|top"
             android:inputType="textMultiLine" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#009900"
+        android:textColor="#ffffff"
+        android:layout_margin="5dp"
+        android:text="Pesan Sekarang" />
 </androidx.constraintlayout.widget.ConstraintLayout>

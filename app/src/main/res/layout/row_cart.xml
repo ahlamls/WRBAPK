@@ -32,12 +32,10 @@
                     android:layout_height="0dp"
                     android:background="@drawable/beras_uwa"
                     android:scaleType="fitXY"
-                    app:layout_aspectRatio="100%"
                     app:layout_constraintDimensionRatio="H,1:1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_widthPercent="100%" />
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView

@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity  implements BottomNavigation
 
         sharedpreferences = getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
         identifier = sharedpreferences.getString("id","asede");
+        Log.d("identifier" , identifier);
         if (identifier.equals("asede")) {
            identifier = generateId();
            phoneHome(identifier);
@@ -274,7 +275,25 @@ public class MainActivity extends AppCompatActivity  implements BottomNavigation
         alertDialog.show();
     }
 
+    @Override
+    public void onBackPressed() {
+        Fragment myFragment = getSupportFragmentManager().findFragmentByTag("home");
+        if (myFragment != null && myFragment.isVisible()) {
+            finish();
+        }
+        Fragment myFragment2 = getSupportFragmentManager().findFragmentByTag("backtohome");
+        if (myFragment2 != null && myFragment2.isVisible()) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fl_container, new HomeFragment(), "home").commit();
+        }
+        Fragment myFragment3 = getSupportFragmentManager().findFragmentByTag("backtocart");
+        if (myFragment3 != null && myFragment3.isVisible()) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fl_container, new CartFragment(), "home").commit();
+        }
+
+    }
 
 
 
-                }
+
+
+}

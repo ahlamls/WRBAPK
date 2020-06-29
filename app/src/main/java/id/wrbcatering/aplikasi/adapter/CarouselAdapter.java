@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import id.wrbcatering.aplikasi.R;
 import id.wrbcatering.aplikasi.indihomo.Agus;
+import id.wrbcatering.aplikasi.indihomo.IMethodCaller;
 import id.wrbcatering.aplikasi.model.CarouselModel;
 
 
@@ -24,12 +25,14 @@ public class CarouselAdapter extends RecyclerView.Adapter<CarouselAdapter.Daftar
 
     private ArrayList<CarouselModel> dataList;
     Context mContext;
-    public CarouselAdapter(ArrayList<CarouselModel> dataList,Context context) {
+
+    public CarouselAdapter(ArrayList<CarouselModel> dataList,Context context,IMethodCaller listener) {
         this.dataList = dataList;
         this.mContext= context;
+        this.listener = listener;
     }
 
-
+    private IMethodCaller listener;
     @Override
     public DaftarViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
@@ -46,7 +49,7 @@ public class CarouselAdapter extends RecyclerView.Adapter<CarouselAdapter.Daftar
         //tambah handler onclick
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(mContext,  "ID yang dipencet " + id , Toast.LENGTH_LONG).show();
+            listener.getKategori(id);
             }
         });
    }

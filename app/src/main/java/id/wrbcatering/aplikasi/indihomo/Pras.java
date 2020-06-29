@@ -42,7 +42,7 @@ public class Pras {
 
 
     public static String generateId() {
-        return "android-" + RandomStringUtils.randomAlphanumeric(61);
+        return "android-" + RandomStringUtils.randomAlphanumeric(60);
     }
 
 

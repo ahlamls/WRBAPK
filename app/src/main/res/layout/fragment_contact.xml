@@ -95,6 +95,21 @@
             android:background="@drawable/tvbg"
             android:gravity="start|top"
             android:inputType="textMultiLine" />
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Metode Pembayaran (Transfer)" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Untuk Metode COD . Siapkan uang tunai sesuai total pemesanan" />
+
+
     </LinearLayout>
 
     <Button

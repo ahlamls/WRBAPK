@@ -124,6 +124,11 @@ public class HomeFragment extends Fragment implements IMethodCaller {
                                 public void getKategori(final String id) {
                                     getKategorix(id);
                                 }
+
+                                @Override
+                                public void loadCart() {
+
+                                }
                             };
 
                             adapter = new CarouselAdapter(carouselArrayList, getActivity(),iMethodCaller);
@@ -266,7 +271,12 @@ public class HomeFragment extends Fragment implements IMethodCaller {
             //progressBar3.setVisibility(View.GONE);
         }
 
-        void showLacakDialog() {
+    @Override
+    public void loadCart() {
+
+    }
+
+    void showLacakDialog() {
             AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
             final EditText edittext = new EditText(getActivity());
             edittext.setBackgroundResource(R.drawable.tvbg);

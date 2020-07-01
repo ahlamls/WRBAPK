@@ -1,6 +1,8 @@
 package id.wrbcatering.aplikasi.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -57,14 +59,14 @@ SharedPreferences sharedPreferences;
     }
 
     @Override
-    public void onBindViewHolder(DaftarViewHolder holder, int position) {
+    public void onBindViewHolder(DaftarViewHolder holder, final int position) {
         holder.nama_tv.setText(dataList.get(position).getNama());
         holder.harga_tv.setText(dataList.get(position).getHarga());
         Picasso.get().load(Agus.DATA_URL + dataList.get(position).getGambar()).into(holder.gambar_iv);
         final String id = dataList.get(position).getId();
 
         //tambah handler onclick
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.tambah_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 RequestQueue queue = Volley.newRequestQueue(mContext);  // this = context
 
@@ -76,7 +78,11 @@ SharedPreferences sharedPreferences;
                             public void onResponse(String response) {
                                 // response
                                 Log.d("phoneHome Response", response);
-
+                                if (response.equals("sukses")) {
+                                    showDialog(1, dataList.get(position).getNama() + " Sudah dimasukan ke keranjang");
+                                } else {
+                                    showDialog(2,"Gagal menambahkan menu ke keranjang");
+                                }
                             }
                         },
                         new Response.ErrorListener()
@@ -85,7 +91,7 @@ SharedPreferences sharedPreferences;
                             public void onErrorResponse(VolleyError error) {
                                 // error
                                 Log.d("phoneHome Error", error.toString());
-
+                                showDialog(2,"Terjadi Kesalahan saat menambahkan menu ke keranjang");
                             }
                         }
                 ) {
@@ -102,6 +108,39 @@ SharedPreferences sharedPreferences;
                 queue.add(postRequest);
             }
         });
+    }
+
+    void showDialog(final int success,final String message) {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                    mContext);
+
+            // set title dialog
+            if (success == 1) {
+                alertDialogBuilder.setTitle("Keranjang");
+            } else {
+                alertDialogBuilder.setTitle("Error");
+            }
+
+
+            // set pesan dari dialog
+            alertDialogBuilder
+                    .setMessage(message)
+                    .setIcon(R.drawable.logo)
+                    .setCancelable(false)
+                    .setPositiveButton("OK",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            // jika tombol diklik, maka akan menutup activity ini
+                            dialog.dismiss();
+                        }
+                    });
+
+            // membuat alert dialog dari builder
+            AlertDialog alertDialog = alertDialogBuilder.create();
+
+            // menampilkan alert dialog
+            alertDialog.show();
+
+
     }
 
     @Override

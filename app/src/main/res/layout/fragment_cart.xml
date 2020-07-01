@@ -16,10 +16,11 @@
         android:text="Keranjang" />
 
     <androidx.recyclerview.widget.RecyclerView
-        app:layout_constraintTop_toBottomOf="@id/rv3"
+        app:layout_constraintTop_toBottomOf="@id/asede"
         android:layout_width="match_parent"
         android:id="@+id/rv3"
         android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/ll"
         android:layout_height="0dp"/>
 
     <ProgressBar
@@ -49,7 +50,7 @@
             android:text="Info / Keterangan (Tidak Wajib) : " />
 
         <EditText
-            android:id="@+id/editTextTextMultiLine"
+            android:id="@+id/info_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -80,7 +81,7 @@
                 android:gravity="center_vertical"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Rp 69,000,000"
+                android:text="Loading...."
                 android:textColor="#000000"
                 android:textSize="24sp"
                 android:textStyle="bold" />

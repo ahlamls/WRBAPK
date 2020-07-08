@@ -1,5 +1,6 @@
 package id.wrbcatering.aplikasi.prakmen;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -41,12 +42,13 @@ public class ContactFragment extends Fragment {
     String kue;
     SharedPreferences sharedPreferences;
     RequestQueue queue;
+    private ProgressDialog pdialog;
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contact, container, false);
         sharedPreferences = getContext().getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
         kue = sharedPreferences.getString("id","asede");
         queue = Volley.newRequestQueue(getContext());
-
+        pdialog = new ProgressDialog(getContext());
         Bundle bundle = this.getArguments();
 
         if(bundle != null){
@@ -91,6 +93,8 @@ public class ContactFragment extends Fragment {
                 if (!method_switch.isChecked()) {
                     method = 1;
                 }
+                pdialog.setMessage("Melakukan Pemesanan . Harap Menunggu");
+                pdialog.show();
                 submitOrder(nama,nohp,alamat,method);
 
             }
@@ -158,6 +162,9 @@ public class ContactFragment extends Fragment {
                     Toast.makeText(getContext(),
                             "Gagal Melakukan Pemesanan" , Toast.LENGTH_LONG).show();
                 }
+                if (pdialog.isShowing()) {
+                    pdialog.dismiss();
+                }
 
 //                if (type == 3) {
 
@@ -171,7 +178,9 @@ public class ContactFragment extends Fragment {
                 Log.e("NewsFrag", "Gagal Melakukan pemesanan" + error.getMessage());
                 Toast.makeText(getContext(),
                         "Gagal Melakukan Pemesanan" + error.getMessage(), Toast.LENGTH_LONG).show();
-
+                if (pdialog.isShowing()) {
+                    pdialog.dismiss();
+                }
                 // hideDialog();
 
             }

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.annotation.TargetApi;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -21,6 +22,8 @@ import android.util.Log;
 import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -44,6 +47,7 @@ import id.wrbcatering.aplikasi.indihomo.Agus;
 import id.wrbcatering.aplikasi.indihomo.Pras;
 import id.wrbcatering.aplikasi.prakmen.CartFragment;
 import id.wrbcatering.aplikasi.prakmen.HomeFragment;
+import id.wrbcatering.aplikasi.prakmen.InfoFragment;
 
 import static id.wrbcatering.aplikasi.indihomo.Pras.SP_NAME;
 import static id.wrbcatering.aplikasi.indihomo.Pras.generateId;
@@ -103,6 +107,9 @@ public class MainActivity extends AppCompatActivity  implements BottomNavigation
                 break;
                 case R.id.cart_menu:
                 fragment = new CartFragment();
+                break;
+                case R.id.info_menu:
+                fragment = new InfoFragment();
                 break;
                 }
                 return loadFragment(fragment);
@@ -177,6 +184,7 @@ public class MainActivity extends AppCompatActivity  implements BottomNavigation
                                 if (uptodate == 1) {
                                     bottomNavigationView.setVisibility(View.VISIBLE);
                                     loadFragment(new HomeFragment());
+                                    loadNotice();
                                 } else {
                                     showUpdateDialog(message,url);
                                 }
@@ -213,6 +221,30 @@ public class MainActivity extends AppCompatActivity  implements BottomNavigation
             }
         };
         queue.add(postRequest);
+    }
+
+    void loadNotice() {
+        WebView myWebView = new WebView(MainActivity.this);
+        myWebView.loadUrl(Agus.URL + "notice");
+        // baris program ini dibutuhkan agar tidak membuka browser
+        myWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
+        // popup
+        new AlertDialog.Builder(MainActivity.this)
+                .setView(myWebView)
+                .setTitle("Notice")
+                .setIcon(R.drawable.logo)
+                .setPositiveButton("Tutup", new DialogInterface.OnClickListener() {
+                    @TargetApi(11)
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                }).show();
     }
 
     private void showUpdateDialog(final String message,final String url){

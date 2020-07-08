@@ -1,5 +1,6 @@
 package id.wrbcatering.aplikasi.prakmen;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,6 +35,7 @@ import id.wrbcatering.aplikasi.model.CarouselModel;
 
 public class TrackFragment extends Fragment {
 String aidi;
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_track, container, false);
 
@@ -43,7 +45,7 @@ String aidi;
             //Toast.makeText(getActivity(),"Aidi : " + String.valueOf(bundle.getInt("aidi")),Toast.LENGTH_SHORT).show();
             aidi = bundle.getString("aidi");
 
-            if (aidi == "") {
+            if (aidi.equals("")) {
                 Toast.makeText(getActivity(),"Error . -2.2",Toast.LENGTH_LONG).show();
 
             }
